@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Hosting Static Sites with Netlify</title>
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="favicons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+  <link rel="manifest" href="favicons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="img/favicons/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- jQuery UI CSS (optional) -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+  <!-- Bootstrap icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 5 -->
+  <script src="https://kit.fontawesome.com/db05692c44.js" crossorigin="anonymous"></script>
+
+  <!-- Main local stylesheet -->
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- jQuery .js -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous" defer></script>
+
+  <!-- Popper .js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" defer></script>
+
+  <!-- boostrap .js -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" defer></script>
+
+  <!-- clipboard .js include -->
+  <script src="js/clipboard.min.js" defer></script>
+
+  <!-- Main local script file -->
+  <script src="js/main.js" defer></script>
+
+
+</head>
+
+<body id="top">
+
+  <div class="container" id="main-page-content">
+
+
+    <!-- .row -->
+    <div class="row mt-4">
+      <div class="col">
+        <div class="text-center"><img src="img/netlify.png" width="375px" alt="Netlify Logo"></div>
+
+        <p class="display-4 mt-5 chocolate">Hosting a Static Website on Netlify</p>
+        <p class="lead slategray mb-5">Workshop outline and notes</p>
+        <div class="row mt-4 display-flex justify-content-around p-4">
+          <a class="mb-2 btn bg-chocolate text-light" role="button" href="https://htmldog.com/references/html/tags/" target="_blank">HTML Reference</a>
+          <a class="mb-2 btn bg-chocolate text-light" role="button" href="https://htmldog.com/references/css/properties/" target="_blank">CSS Reference</a>
+          <a class="mb-2 btn bg-chocolate text-light" role="button" href="https://getbootstrap.com/docs/4.6/getting-started/introduction/" target="_blank">Bootstrap 4 Docs</a>
+          <a class="mb-2 btn bg-chocolate text-light" role="button" href="https://docs.netlify.com/" target="_blank">Netlify Docs</a>
+        </div>
+
+
+      </div>
+      <!-- .col -->
+
+
+    </div>
+    <!-- .row -->
+
+    <!-- Search results / classes go here  -->
+    <div class="row mt-2">
+
+      <div class="col-sm-12">
+
+        <div class="row border-bottom pb-5">
+          <div class="col-12 col-md-6 offset-md-3">
+            <ul class="nav nav-pills nav-fill mt-5" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" href="#panel96104909" data-toggle="tab">Make a site</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#panel17305909" data-toggle="tab">Upload it</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- html ------------------------------------>
+        <div class="tab-content" id="tab-content-8935682">
+
+
+          <div class="mt-3 ml-2 tab-pane fade show active" id="panel96104909" role="tabpanel" aria-labelledby="...">
+
+            <ul class="list-group list-group-flush utility-list-items">
+
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block bg-alice text-center'>0</p>
+                  </div>
+                  <div class="col-12 col-md-3">
+
+                    <div class="form-group">
+                      <select class="form-control custom-select" name="background-type" id="background-type">
+                        <option value="none">Transparent background</option>
+                        <option value="aliceblue">Shaded background</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Margin</span>
+                        </div>
+                        <input value="0" type="number" class="form-control number-control" min="0" aria-label="" name="input-margin" id="input-margin">
+                        <div class="input-group-append">
+                          <span class="input-group-text">px</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Padding</span>
+                        </div>
+                        <input value="0" type="number" class="form-control number-control" min="0" aria-label="" name="input-padding" id="input-padding">
+                        <div class="input-group-append">
+                          <span class="input-group-text">px</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Border</span>
+                        </div>
+                        <input value="0" type="number" class="form-control number-control" min="0" aria-label="" name="input-border" id="input-border">
+                        <div class="input-group-append">
+                          <span class="input-group-text">px</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <select class="form-control custom-select" name="border-type" id="border-type">
+                        <option value="none">Transparent border</option>
+                        <option value="solid">Solid border</option>
+                        <option value="dashed">Dashed border</option>
+                        <option value="dotted">Dotted border</option>
+                        <option value="double">Double border</option>
+                        <option value="inset">Inset border</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <select class="form-control custom-select" name="display-type" id="display-type">
+                        <option value="block">Block</option>
+                        <option value="inline">Inline</option>
+                      </select>
+                    </div>
+
+                    <button type="button" id="update-button" class="btn btn-primary mr-1 mb-3">Update</button>
+                    <button type="button" class="btn btn-light text-primary mb-3" id="reset">Reset</button>
+
+
+                  </div>
+                  <div class="col-12 col-md-4 border" contenteditable>
+                    <p class="mb-3"><br><code> &lt;div&gt;<br>&nbsp;&nbsp;&nbsp;&lt;p&gt;Paragraph 1&lt;/p&gt;<br>&nbsp;&nbsp;&nbsp;&lt;p&gt;Paragraph 2&lt;/p&gt;<br>&lt;/div&gt;</code></p>
+                    <hr>
+                    <p class="mb-3"><strong>Renders:</strong></p>
+                    <div class="div border-dashed">
+                      <p class="box-model-paragraph" style="margin: 0; padding: 0;">
+                        Paragraph 1</p>
+                      <p class="box-model-paragraph" style="margin: 0; padding: 0;">Paragraph 2</p>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4">
+                    <div class="p-3">
+                      <h5>The Box Model (Review)</h5>
+                      <p>Almost every HTML element is a box, with <code>margin</code>, <code>padding</code>, <code>border</code> and other properties that establish its relation to other elements.</p>
+                      <p><code>Block</code> elements stretch to fit the width of their container. <code>Inline</code> elements are only the width of the content they contain.</p>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>1</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/directories.png" class="img-fluid" alt="image of directory structures">
+                    <p class="lead mt-3"><i class="fas fa-check mr-3"></i>Create folders for your website.</p>
+
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create a folder structure</h5>
+                    <p>On your Desktop, create a root folder called something like <code>my-website</code>. Inside this folder, make 3 more folders called <code>css</code>, <code>js</code>, and <code>img</code>. Directory names are abitrary, though
+                      these are conventional.</p>
+                    <p class="alert alert-primary">Make sure all folder names are lowercase. Use hyphens in place of spaces for folders and files.</p>
+
+                  </div>
+                </div>
+              </li>
+
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>2</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/10.png" class="img-fluid shadow mb-4" alt="">
+                    <p class="lead mt-3"><i class="fas fa-check mr-3"></i>Download an editor such as <a href="https://atom.io/" target="_blank">Atom.io</a> or <a href="https://code.visualstudio.com/" target="_blank">VS Code.</a></p>
+                    <p class="lead mb-5"><i class="fas fa-check mr-3"></i>Open your website in an editor (we'll use Atom).</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Open your website in an editor</h5>
+                    <p>I'll use Atom in this workshop. For Atom, I recommend downloading the <a href="https://atom.io/packages/emmet" target="_blank">Emmet</a> and <a href="https://atom.io/packages/atom-beautify" target="_blank">Atom Beautify</a>
+                      packages. For more packages visit <a href="https://atom.io/packages" target="_blank">the Atom Plugins Directory</a>. VS Code has similar packages available.</p>
+                    <p>Open the website folder in your code editor.</p>
+                  </div>
+                </div>
+              </li>
+
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>3</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/1.jpg" class="img-fluid shadow mb-5" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Navigate to Bootstrapr</h5>
+                    <p>The <a href="https://bootstrapr.io">Bootstrapr.io</a> website allows you to build and customize bespoke Bootstrap components and pages in Bootstrap v3 or v4.</p>
+
+                    <p>In this workshop, the version we'll be using is <strong>Bootstrap 4</strong>.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>4</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/2.png" class="img-fluid shadow mb-5" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Navigate to the Pages tool</h5>
+                    <p>Click the link to the <code>Pages tool</code> in the navigation menu, top-right.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>5</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/3.png" class="img-fluid shadow mb-5" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create index.html with Pages tool</h5>
+                    <p>Select the components to add to your page from the <code>Add Components</code> dropdown. When satisfied, click the <code>Build</code> button to generate the HTML page.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>6</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/4.png" class="img-fluid shadow mb-5" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Save the HTML page you built</h5>
+                    <p>Click the <code>Save Page</code> button to save your page.</p>
+                    <p>Rename the page <code>index.html</code> and place it in your website root ("my-website") directory.</p>
+
+                  </div>
+                </div>
+              </li>
+
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>7</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/5.png" class="img-fluid shadow mb-5" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create a 2nd page with Pages tool</h5>
+                    <p>For this page, let's use the blank template. (We'll add a contact form to it later).</p>
+                    <p>Click the <code>Show Templates</code> button. Then click on the <code>Starter template</code>.</p>
+                    <p>Rename the page <code>contact.html</code> and place it in your website root ("my-website") directory.</p>
+
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>8</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/4.png" class="img-fluid shadow mb-5" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Save the HTML page you built</h5>
+                    <p>Click the <code>Save Page</code> button to save your 2nd page.</p>
+                    <p>Rename the page <code>contact.html</code> and place it in your website root ("my-website") directory.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>9</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/6.png" class="img-fluid shadow mb-5" alt="image of directory structures">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Your website directory now</h5>
+                    <p>Your website folder structure should now look something like this, with 3 directories (folders), and two HTML files all in the root directory.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>10</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/7.png" class="img-fluid shadow mb-5" alt="">
+
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create the Contact form</h5>
+                    <p>For the <code>contact.html</code> page, let'sadd a map in one column, and a contact form in the next column.</p>
+                    <p>To do this, we'll need the <code>Columns</code> tool.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>11</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/8.png" class="img-fluid shadow mb-5" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Add columns</h5>
+                    <p>Let's add columns to the Contact page. Navigate to the <code>Columns tool</code> through the navigation menu, top-right.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>12</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/9.png" class="img-fluid shadow mb-4" alt="">
+                    <p class="copy-util mb-5">&lt;div class="row"&gt;<br>&nbsp;&nbsp;&lt;div class="col-sm-6"&gt;Form goes here&lt;/div&gt;<br>&nbsp;&nbsp;&lt;div class="col-sm-6"&gt;Map goes here&lt;/div&gt;<br>&lt;/div&gt;</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Select the two-column option</h5>
+                    <p>Select the "2 columns | 50% - 50%" component from the <code>Add Column Sets</code> dropdown.
+                    <p>
+                    </p>Click the <code>Build</code> button to generate the HTML.</p>
+                    <p>(Or you may copy the code at left)</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>13</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/11.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create the form</h5>
+                    <p>Let's create a form with the <code>Forms tool</code>. Navigate to the <code>Forms tool</code>. From the dropdown, select the appropriate form elements.</p>
+                    <p>Click <code>Build</code> to generate the HMTL.</p>
+                    <p>Click the <code>Prettify</code> button. Click the <code>Copy</code> button and paste the generated HTML into the appropriate column on the Contact.html page.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>14</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <p class="copy-util">&lt;div style="width: 100%"&gt;&lt;iframe scrolling="no" marginheight="0" marginwidth="0"
+                      src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" width="100%" height="600"
+                      frameborder="0"&gt;&lt;/iframe&gt;&lt;a href="http://www.gps.ie/"&gt;sport gps&lt;/a&gt;&lt;/div&gt;
+                    </p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Generate a Map</h5>
+                    <p>Copy this code for a sample generated <code>iframe</code> of an interactive map&mdash;or <a href="https://www.maps.ie/create-google-map/" target="_blank">generate your own</a>.</p>
+                    <p>paste the generated HTML into the appropriate column on the Contact.html page.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>15</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+
+                    <a href="https://bootstrapr.io/bs4/accordions.html" target="_blank">Accordions</a>, <a href="https://bootstrapr.io/bs4/alerts.html" target="_blank">Alerts</a>, <a href="https://bootstrapr.io/bs4/badges.html"
+                      target="_blank">Badges</a>, <a href="https://bootstrapr.io/bs4/blockquotes.html" target="_blank">Blockquotes</a>, <a href="https://bootstrapr.io/bs4/breadcrumbs.html" target="_blank">Breadcrumbs</a>, <a
+                      href="https://bootstrapr.io/bs4/button-groups.html" target="_blank">Button Groups</a>, <a href="https://bootstrapr.io/bs4/buttons.html" target="_blank">Buttons</a>, <a href="https://bootstrapr.io/bs4/cards.html"
+                      target="_blank">Cards</a>, <a href="https://bootstrapr.io/bs4/carousels.html" target="_blank">Carousels</a>, <a href="https://bootstrapr.io/bs4/code-wells.html" target="_blank">Code Wells</a>, <a
+                      href="https://bootstrapr.io/bs4/columns.html" target="_blank">Columns</a>, <a href="https://bootstrapr.io/bs4/footers.html" target="_blank">Footers</a>, <a href="https://bootstrapr.io/bs4/forms.html" target="_blank">Forms</a>,
+                    <a href="https://bootstrapr.io/bs4/image-grids.html" target="_blank">Image Grids</a>, <a href="https://bootstrapr.io/bs4/images.html" target="_blank">Images</a>, <a href="https://bootstrapr.io/bs4/jumbotrons.html"
+                      target="_blank">Jumbotrons</a>, <a href="https://bootstrapr.io/bs4/list-groups.html" target="_blank">List Groups</a>, <a href="https://bootstrapr.io/bs4/media-lists.html" target="_blank">Media Lists</a>, <a
+                      href="https://bootstrapr.io/bs4/modals.html" target="_blank">Modals</a>, <a href="https://bootstrapr.io/bs4/navbars.html" target="_blank">Navbars</a>, <a href="https://bootstrapr.io/bs4/navs.html" target="_blank">Navs</a>, <a
+                      href="https://bootstrapr.io/bs4/pagination.html" target="_blank">Pagination</a>, <a href="https://bootstrapr.io/bs4/popovers.html" target="_blank">Popovers</a>, <a href="https://bootstrapr.io/bs4/progress-bar.html"
+                      target="_blank">Progress Bar</a>, <a href="https://bootstrapr.io/bs4/tables.html" target="_blank">Tables</a>, <a href="https://bootstrapr.io/bs4/tabs-pills.html" target="_blank">Tabs & Pills</a>, <a
+                      href="https://bootstrapr.io/bs4/toast.html" target="_blank">Toast</a>, <a href="https://bootstrapr.io/bs4/tooltips.html" target="_blank">Tooltips</a>, <a href="https://bootstrapr.io/bs4/videos.html" target="_blank">Videos</a>
+
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Explore adding other components</h5>
+                    <p>Copy this code for a sample generated <code>iframe</code> of an interactive map&mdash;or <a href="https://www.maps.ie/create-google-map/" target="_blank">generate your own</a>.</p>
+                    <p>paste the generated HTML into the appropriate column on the Contact.html page.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>16</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/12.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Review the Utilities</h5>
+                    <p>Before we move to moving our page online with Git and Github, let's review the <code>Utilities page</code> offers a quick way to search for common Bootstrap utilies classes.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- Step ------------------------------------------------>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'><i class="fad fa-fw fa-hands-heart"></i></p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/13.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Bonus &mdash; Bootstrap 4 web template</h5>
+                    <p>For those looking for a free, professional Bootstrap 4 <a href="https://randal-sean-harrison.github.io/academic-website-template-bs4/" target="_blank">academic website template,</a> I made one. No attribution required. Works
+                      with all Bootstrap 4 libraries.</p>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+            <!-- .list-group-flush -->
+          </div>
+          <!-- closing panel -->
+
+          <!-- Github -------------------------------->
+          <div class="mt-3 ml-2 tab-pane fade" id="panel17305909" role="tabpanel" aria-labelledby="...">
+
+            <ul class="list-group list-group-flush utility-list-items">
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>1</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/14.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Download and install Git</h5>
+                    <p>Git is a free software version control package. We'll need to install it to push our website up to Github.</p>
+                    <p>Navigate to <a href="https://git-scm.com/downloads" target="_blank">git-scm.com</a> to download the package for Mac, Windows, or Linux.</p>
+                    <p>After downloading it, <code>run the package installer</code>.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>2</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/15.png" class="img-fluid shadow mb-4" alt="">
+
+                    <p class="copy-util">cd</p>
+                    <p class="copy-util">cd Desktop</p>
+                    <p class="copy-util mb-4">cd my-website</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Open your shell/CLI/Terminal</h5>
+                    <p>Open a shell command line editor (or terminal) such as Bash or Zsh. We will use this interface to enter our Git commands.</p>
+                    <p>Type these commands in your terminal to navigate to the root directory of your website.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>3</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/16.png" class="img-fluid shadow mb-4" alt="">
+                    <p class="copy-util mb-4">git init</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Init your repo</h5>
+                    <p>To begin tracking changes to your your website's files, you must first initialize the root directory as a git repository (or 'repo').</p>
+                    <p>Type <code>git init</code> and press enter.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>4</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/17.png" class="img-fluid shadow mb-4" alt="">
+                    <p class="copy-util mb-4">git status</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>View the status of your files</h5>
+                    <p>Use this command to track the status of your files &mdash; whether changes have been made or not.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>5</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/18.png" class="img-fluid shadow mb-4" alt="">
+                    <p class="copy-util">git add .</p>
+                    <p class="copy-util mb-4">git commit -m "initial commit"</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Add and Commit your files</h5>
+                    <p>You will need to add and commit your files to push them up to the remote repository. We'll create that in the next steps.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>6</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/19.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create a Github account</h5>
+                    <p>Great! You've created files and committed them locally. Now let's push them to your remote repo on Github! To push our files to a (free) remote repository, we'll need to <a href="https://github.com/" target="_blank">create an
+                        account on Github</a>.</p>
+                    <p>I recommend using the simple sign in, authenticating with your Notre Dame Google account. But you may create your own unique username and password if you choose to.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>7</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/2fa.png" class="img-fluid shadow mb-4" alt="image of two-factor authentication">
+                    <img src="img/step-images/2fa-2.png" class="img-fluid shadow mb-4" alt="image of two-factor authentication">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create an access token for Github</h5>
+                    <p>Before we push our files to Github, we'll need to create a special key or 'personal access token' (a long character string) that we'll use as our password when we push code up to a remote repository.</p>
+                    <p>Create your token now by visiting the <a href="https://github.com/settings/tokens/new?scopes=repo&description=Repository%20Access" target="_blank">personal access tokens page</a>. Make sure the 'repo' box is checked.</p>
+                    <p class="alert alert-warning"> <i class="fad fa-exclamation-triangle mr-2"></i><strong>Don't skip this step &mdash;</strong>If you try to push to a remote repo without completing this step, and using the password you use to sign
+                      into GitHub, you'll see the 'fatal' error at left.</p>
+                    <p class="alert alert-danger"> <i class="fad fa-exclamation-triangle mr-2"></i><strong>Keep track of this &mdash;</strong>There is no way to recover this token, so make sure to keep it securely.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>8</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <p class="copy-util">git config --global credential.helper store</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Store the access token in Git</h5>
+                    <p>In order to avoid entering your personal access token each time you push code to your GitHub repo, you can store it in Git's credential helper.</p>
+
+                    <p>In your terminal, type the the following text. Now, the next time you push to your remote repo, use the personal access token instead of your GitHub login password. It will be stored in the credential helper and you won't be
+                      required to enter a password in future.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>9</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/2fa-3.png" class="img-fluid shadow mb-4" alt="image of two-factor authentication">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Navigate to your repositories page</h5>
+                    <p>Next, click the avatar (circle icon) in the top right menu and select the 'Your Repositories' option to navigate to your respositories page. It should be empty.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>10</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/20.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create a remote repository</h5>
+                    <p>Let's create the repo! Click on the green button to create a new repository. We'll now sync our local code repository to this one.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>11</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/21.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Name, describe, and hide the repo</h5>
+                    <p>Provide a repository name, separated by hyphens and NOT spaces.</p>
+                    <p>Provide a description of your repository. In this case, you might add something like 'My personal website'.</p>
+                    <p>I recommend setting your repo to 'Private'. The code will be hidden, but the public website will be visible to the public.</p>
+                    <p>Click <code>Create repository</code>.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>12</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/22.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Copy your repo's path</h5>
+                    <p>You're going to see this new page with lots of code. However, these are the only three lines you need.</p>
+                  </div>
+                </div>
+              </li>
+
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>13</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/23.png" class="img-fluid shadow mb-4" alt="">
+                    <p class="copy-util">git branch -M main</p>
+                    <p class="copy-util"> git remote add origin <code class="red">https://github.com/randal-sean-harrison/test-repo.git</code></p>
+                    <p class="copy-util mb-4">git push -u origin main</p>
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Link your local and remote repos</h5>
+                    <p>Type these into your terminal in order and press enter after each line.</p>
+                    <p class="alert alert-warning"><i class="fad fa-fw fa-exclamation-triangle mr-2"></i>Note that the URL to your particular repo will differ from mine (in red).</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>14</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/24.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Navigate to your repo's home page</h5>
+                    <p>To navigate to the repo's home page, click on the link, top-left, with the name of the repo.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>15</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/25.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Navigate to Settings</h5>
+                    <p>Click on the <code>Settings</code> tab.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>16</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/26.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Navigate to Pages</h5>
+                    <p>Click on the <code>Pages</code> tab.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>17</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/27.png" class="img-fluid shadow mb-4" alt="">
+                    <img src="img/step-images/28.png" class="img-fluid shadow mb-4" alt="">
+
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Enable GitHub Pages</h5>
+                    <p>The code that is in your repo, even if set to 'private' can be displayed publicly. To render your website, you must enable GitHub Pages.</p>
+                    <p>Click the <code>Source</code> dropdown and select 'Main'.</p>
+                    <p>Click <code>Save</code>.</p>
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>18</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/29.png" class="img-fluid shadow mb-4" alt="">
+                    <img src="img/step-images/24.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Copy your Pages link</h5>
+                    <p>Your site will be published to a specific GitHub Pages link. Right-click the URL and select 'Copy Link'.</p>
+                    <p>Navigate back to the repo's home page by clicking on the link, top-left, with the name of the repo.</p>
+
+
+                  </div>
+                </div>
+              </li>
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>19</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/30.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Record your Pages link</h5>
+                    <p>Once on the home page for your repo, click on the Gear icon. In the Website field, paste the link to your GitHub Pages.</p>
+
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>20</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/32.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create an Account on Netlify</h5>
+                    <p>Navigate to <a href="https://www.netlify.com/" target="_blank">Netlify.com</a>. Click on the <code>Sign Up</code> button in the top right corner.</p>
+                    <p class="alert alert-warning">If you already have a Netlify account, simply Login and skip to step XX.</p>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>21</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/33.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create an Account on Netlify</h5>
+                    <p>Navigate to <a href="https://www.netlify.com/" target="_blank">Netlify.com</a>. Click on the <code>Sign Up</code> button in the top right corner.</p>
+                  </div>
+                </div>
+              </li>
+
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>22</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/34.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>Create an Account on Netlify</h5>
+                    <p>Navigate to <a href="https://www.netlify.com/" target="_blank">Netlify.com</a>. Click on the <code>Sign Up</code> button in the top right corner.</p>
+                  </div>
+                </div>
+              </li>
+
+
+
+
+
+
+
+
+
+              <!-- step -------------------->
+              <li class="list-group-item shadow-sm p-4">
+                <div class="row">
+                  <div class="col-12 col-md-1 d-flex justify-content-center">
+                    <p class='short-round center-block'>XX</p>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <img src="img/step-images/31.png" class="img-fluid shadow mb-4" alt="">
+                  </div>
+                  <div class="col-12 col-md-5">
+                    <h5>View your new website</h5>
+                    <p>The link to your GitHub pages, visible to the public, will be listed here. Click it at any time to view your website.</p>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+        <!-- tab-content -->
+      </div>
+      <!-- col-sm-12 -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- .container -->
+
+
+  <!-- Footer include -->
+  <div id="footer"></div>
+
+  <!-- Back-to-top button -->
+  <a role="button" id="topper" class="btn scroll-link" href="#top"><i class="fas fa-fw fa-2x fa-angle-up" aria-hidden="true"></i></a>
+
+</body>
+
+</html>
